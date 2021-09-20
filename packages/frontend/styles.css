@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+
+.product-name {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 44px;
+  line-height: 52px;
+  color: #000000;
+}
+
+.avg-rating {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 44px;
+  line-height: 52px;
+  margin-right: 1ch;
+  color: #000000;
+}
+
+.star {
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0.02%;
+  color: linear-gradient(180deg, #ffcd69 0%, #fdce71 100%);
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.star-group {
+  display: flex;
+  flex-direction: row;
+  width: 170px;
+  height: 30px;
+  left: 314px;
+  top: 223px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 40vw;
+  width: 40vw;
+  align-self: center;
+}
+.overviewContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.innerOverviewContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-review-button {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  padding: 12px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.add-review-button-text {
+  font-family: Helvetica Neue;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #797874;
+}
+
+.reviews {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 33px;
+  color: #000000;
+}
+
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviews-container-inner {
+  display: flex;
+  flex-direction: column;
+  max-width: 50vw;
+}
+
+.review-container {
+  display: flex;
+  align-items: center;
+}
+
+.review-text-rating {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #000000;
+}
+.review-text-body {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  color: #b1b1b1;
+}
