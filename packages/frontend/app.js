@@ -1,4 +1,5 @@
 const API_URL = "http://127.0.0.1:3000/api";
+const USER_RATING = {};
 
 const generateNewStarSnippet = (rating) => {
   const grayStarCount = Math.abs(5 - rating);
@@ -89,6 +90,49 @@ const showStarsOnSelect = (rating) => {
   const starSnippet = generateNewStarSnippet(rating, true);
   const starSnippetElem = document.querySelector(".stars-on-overlay");
   starSnippetElem.innerHTML = starSnippet;
+  USER_RATING.rating = rating;
+};
+
+//validate and send the new rating to the server
+const validateAndSendRating = () => {
+  const reviewInput = document.querySelector(".rating-textarea");
+  const ratingText = reviewInput.value;
+  const rating = USER_RATING.rating;
+  if (rating > 0 && rating < 6 && ratingText.length > 0) {
+    fetch(`${API_URL}/reviews`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        starCount: rating,
+        reviewText: ratingText,
+      }),
+    })
+      .then((response) => response.json()) // parse the response as JSON
+      .then((data) => {
+        fetchRatings();
+        closeOverlay();
+        fetchAverageRating();
+        // empty the rating
+        reviewInput.value = "";
+        // reset the rating
+        USER_RATING.rating = 0;
+        const RATING_TEMPLATE = `<img src="/assets/star_gray.svg" class="star" onclick="showStarsOnSelect(1)" />
+        <img src="/assets/star_gray.svg" class="star" onclick="showStarsOnSelect(2)" />
+        <img src="/assets/star_gray.svg" class="star" onclick="showStarsOnSelect(3)" />
+        <img src="/assets/star_gray.svg" class="star" onclick="showStarsOnSelect(4)" />
+        <img src="/assets/star_gray.svg" class="star" onclick="showStarsOnSelect(5)" />`;
+        const starSnippetElem = document.querySelector(".stars-on-overlay");
+        starSnippetElem.innerHTML = RATING_TEMPLATE;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    alert("Invalid review");
+  }
 };
 
 window.onload = () => {
