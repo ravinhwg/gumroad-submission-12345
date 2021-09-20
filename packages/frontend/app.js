@@ -67,6 +67,30 @@ const injectAverageRating = (avgRating) => {
   const newStarSnippetElem = document.querySelector(".avg-rating-stars");
   newStarSnippetElem.innerHTML = newStarSnippet;
 };
+
+// generate overlay
+const overlayBg = document.createElement("div");
+overlayBg.classList.add("overlayBg");
+overlayBg.onclick = closeOverlay;
+document.body.appendChild(overlayBg);
+const reviewOverlay = document.querySelector(".review-overlay");
+
+function openOverlay() {
+  overlayBg.classList.add("open");
+  reviewOverlay.classList.add("open");
+}
+function closeOverlay() {
+  overlayBg.classList.remove("open");
+  reviewOverlay.classList.remove("open");
+}
+
+// show stars on hover
+const showStarsOnSelect = (rating) => {
+  const starSnippet = generateNewStarSnippet(rating, true);
+  const starSnippetElem = document.querySelector(".stars-on-overlay");
+  starSnippetElem.innerHTML = starSnippet;
+};
+
 window.onload = () => {
   fetchRatings();
   fetchAverageRating();
