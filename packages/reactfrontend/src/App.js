@@ -5,7 +5,9 @@ import ReviewUnit from "./components/ReviewUnit";
 import "./App.css";
 import ReviewStarUnit from "./components/ReviewStarunit";
 import Modal from "react-modal";
+const API_URL = `http://127.0.0.1:3000/api`;
 
+Modal.setAppElement("#root");
 function App() {
   const [ratings, setRatings] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
@@ -16,7 +18,7 @@ function App() {
   const [newUserReviewRating, setNewUserReviewRating] = useState(0);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:3000/api/reviews`)
+    fetch(`${API_URL}/reviews`)
       .then((response) => response.json())
       .then((data) => {
         const ratings = data.reviews.map((review) => {
@@ -42,7 +44,7 @@ function App() {
     return () => clearInterval(interval);
   });
   useEffect(() => {
-    fetch(`http://127.0.0.1:3000/api/reviews/average`)
+    fetch(`${API_URL}/reviews/average`)
       .then((response) => response.json())
       .then((data) => {
         setAverageRating(data.average);
@@ -67,7 +69,7 @@ function App() {
       userSelectedRating < 6 &&
       newUserReview.length > 0
     ) {
-      fetch(`http://127.0.0.1:3000/api/reviews`, {
+      fetch(`${API_URL}/reviews`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -138,12 +140,12 @@ function App() {
         style={{
           content: {
             maxWidth: "40%",
+            width: "40%",
             maxHeight: "60%",
             top: "50%",
             left: "50%",
             right: "auto",
             bottom: "auto",
-            marginRight: "-50%",
             transform: "translate(-50%, -50%)",
           },
         }}
