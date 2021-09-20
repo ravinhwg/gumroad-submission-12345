@@ -1,0 +1,7 @@
+{
+    "name": "gummy-reviews",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ]
+}
