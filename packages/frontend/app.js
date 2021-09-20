@@ -1,6 +1,5 @@
 const generateNewRatingSnippet = (rating, ratingText) => {
   const grayStarCount = Math.abs(5 - rating);
-
   const GRAY_STAR_TEMPLATE = `<img src="/assets/star_gray.svg" class="star" />`;
   const GOLD_STAR_TEMPLATE = `<img src="/assets/star_gold.svg" class="star" />`;
   const starsArray = [];
@@ -23,3 +22,22 @@ const injectRatingSnippet = (rating, ratingText) => {
   // insert rating snippet
   ratingContainer.insertAdjacentHTML("beforeend", ratingSnippet);
 };
+
+const fetchRatings = () => {
+  const API_URL = "http://127.0.0.1:3000/api";
+  fetch(`${API_URL}/reviews`)
+    .then((response) => response.json())
+    .then((data) => {
+      const ratings = data.reviews.map((review) => {
+        return {
+          rating: review.star_count,
+          ratingText: review.review_text,
+        };
+      });
+      ratings.forEach((rating) => {
+        injectRatingSnippet(rating.rating, rating.ratingText);
+      });
+    });
+};
+
+window.onload = fetchRatings;
