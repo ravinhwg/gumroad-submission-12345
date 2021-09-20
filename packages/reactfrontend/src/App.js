@@ -9,6 +9,8 @@ function App() {
   const [ratings, setRatings] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [addNewReviewTouched, setAddNewReviewTouched] = useState(false);
+  const [userSelectedRating, setUserSelectedRating] = useState(0);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:3000/api/reviews`)
@@ -37,6 +39,11 @@ function App() {
 
   const closeModal = () => {
     setModalIsOpen(false);
+  };
+
+  const showStarsOnSelect = (rating) => {
+    setAddNewReviewTouched(true);
+    setUserSelectedRating(rating);
   };
 
   return (
@@ -97,36 +104,42 @@ function App() {
               <h2 class="product-name">What's your rating?</h2>
               <p class="rating-text">Rating</p>
               <div class="star-group stars-on-overlay">
-                <img
-                  src={starGray}
-                  class="star"
-                  onclick="showStarsOnSelect(1)"
-                  alt="star"
-                />
-                <img
-                  src={starGray}
-                  class="star"
-                  onclick="showStarsOnSelect(2)"
-                  alt="star"
-                />
-                <img
-                  src={starGray}
-                  class="star"
-                  onclick="showStarsOnSelect(3)"
-                  alt="star"
-                />
-                <img
-                  src={starGray}
-                  class="star"
-                  onclick="showStarsOnSelect(4)"
-                  alt="star"
-                />
-                <img
-                  src={starGray}
-                  class="star"
-                  onclick="showStarsOnSelect(5)"
-                  alt="star"
-                />
+                {!addNewReviewTouched ? (
+                  <>
+                    <img
+                      src={starGray}
+                      class="star"
+                      onClick={() => showStarsOnSelect(1)}
+                      alt="star"
+                    />
+                    <img
+                      src={starGray}
+                      class="star"
+                      onClick={() => showStarsOnSelect(2)}
+                      alt="star"
+                    />
+                    <img
+                      src={starGray}
+                      class="star"
+                      onClick={() => showStarsOnSelect(3)}
+                      alt="star"
+                    />
+                    <img
+                      src={starGray}
+                      class="star"
+                      onClick={() => showStarsOnSelect(4)}
+                      alt="star"
+                    />
+                    <img
+                      src={starGray}
+                      class="star"
+                      onClick={() => showStarsOnSelect(5)}
+                      alt="star"
+                    />
+                  </>
+                ) : (
+                  <ReviewStarUnit rating={userSelectedRating} />
+                )}
               </div>
               <p class="rating-text">Review</p>
               <textarea
