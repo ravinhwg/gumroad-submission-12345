@@ -52,4 +52,14 @@ module.exports = {
       throw new Error(error);
     }
   },
+  getAverageReview: async (req, res) => {
+    try {
+      const average = await query("SELECT AVG(star_count) FROM reviews");
+      res.status(200).json({
+        average: +average.rows[0].avg,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
 };
