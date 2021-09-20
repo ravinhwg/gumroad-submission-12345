@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import starGray from "./assets/star_gray.svg";
 import ReviewUnit from "./components/ReviewUnit";
 import "./App.css";
+import ReviewStarUnit from "./components/ReviewStarunit";
 
 function App() {
   const [ratings, setRatings] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:3000/api/reviews`)
@@ -17,6 +19,17 @@ function App() {
           };
         });
         setRatings(ratings);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:3000/api/reviews/average`)
+      .then((response) => response.json())
+      .then((data) => {
+        setAverageRating(data.average);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
@@ -33,8 +46,10 @@ function App() {
           <div>
             <div class="overviewContainer">
               <div class="innerOverviewContainer">
-                <p class="avg-rating"></p>
-                <div class="star-group avg-rating-stars"></div>
+                <p class="avg-rating">{averageRating.toFixed(1)}</p>
+                <div class="star-group avg-rating-stars">
+                  <ReviewStarUnit rating={averageRating} />
+                </div>
               </div>
               <button
                 class="add-review-button add-review-button-text"
