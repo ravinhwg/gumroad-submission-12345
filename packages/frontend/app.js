@@ -1,3 +1,5 @@
+const API_URL = "http://127.0.0.1:3000/api";
+
 const generateNewRatingSnippet = (rating, ratingText) => {
   const grayStarCount = Math.abs(5 - rating);
   const GRAY_STAR_TEMPLATE = `<img src="/assets/star_gray.svg" class="star" />`;
@@ -24,7 +26,6 @@ const injectRatingSnippet = (rating, ratingText) => {
 };
 
 const fetchRatings = () => {
-  const API_URL = "http://127.0.0.1:3000/api";
   fetch(`${API_URL}/reviews`)
     .then((response) => response.json())
     .then((data) => {
@@ -40,4 +41,19 @@ const fetchRatings = () => {
     });
 };
 
-window.onload = fetchRatings;
+const fetchAverageRating = () => {
+  fetch(`${API_URL}/reviews/average`)
+    .then((response) => response.json())
+    .then((data) => {
+      const averageRating = data.average;
+      console.log(averageRating);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+window.onload = () => {
+  fetchRatings();
+  fetchAverageRating();
+};
