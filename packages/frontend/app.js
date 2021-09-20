@@ -50,13 +50,23 @@ const fetchAverageRating = () => {
     .then((response) => response.json())
     .then((data) => {
       const averageRating = data.average;
-      console.log(averageRating);
+      injectAverageRating(averageRating);
     })
     .catch((error) => {
       console.log(error);
     });
 };
 
+const injectAverageRating = (avgRating) => {
+  const averageRatingNumber = avgRating.toFixed(1);
+  const averageRatingElem = document.querySelector(".avg-rating");
+  averageRatingElem.innerHTML = averageRatingNumber;
+
+  // new star snippet
+  const newStarSnippet = generateNewStarSnippet(Math.round(avgRating));
+  const newStarSnippetElem = document.querySelector(".avg-rating-stars");
+  newStarSnippetElem.innerHTML = newStarSnippet;
+};
 window.onload = () => {
   fetchRatings();
   fetchAverageRating();
