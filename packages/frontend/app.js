@@ -15,3 +15,11 @@ const generateNewRatingSnippet = (rating, ratingText) => {
   const RATING_SNIPET_TEMPLATE = `<div class="review-container"><div class="star-group">${stars}</div><p class="review-text-rating">${rating}</p><p class="review-text-body">, ${ratingText}</p></div>`;
   return RATING_SNIPET_TEMPLATE;
 };
+
+const injectRatingSnippet = (rating, ratingText) => {
+  const ratingSnippet = generateNewRatingSnippet(rating, ratingText);
+  // get rating container
+  const ratingContainer = document.querySelector(".reviews-container-inner");
+  // insert rating snippet
+  ratingContainer.insertAdjacentHTML("beforeend", ratingSnippet);
+};
