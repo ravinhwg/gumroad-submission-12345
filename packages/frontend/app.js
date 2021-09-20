@@ -1,6 +1,6 @@
 const API_URL = "http://127.0.0.1:3000/api";
 
-const generateNewRatingSnippet = (rating, ratingText) => {
+const generateNewStarSnippet = (rating) => {
   const grayStarCount = Math.abs(5 - rating);
   const GRAY_STAR_TEMPLATE = `<img src="/assets/star_gray.svg" class="star" />`;
   const GOLD_STAR_TEMPLATE = `<img src="/assets/star_gold.svg" class="star" />`;
@@ -12,7 +12,11 @@ const generateNewRatingSnippet = (rating, ratingText) => {
     starsArray.push(GRAY_STAR_TEMPLATE);
   }
   const stars = starsArray.join("");
+  return stars;
+};
 
+const generateNewRatingSnippet = (rating, ratingText) => {
+  const stars = generateNewStarSnippet(rating);
   const RATING_SNIPET_TEMPLATE = `<div class="review-container"><div class="star-group">${stars}</div><p class="review-text-rating">${rating}</p><p class="review-text-body">, ${ratingText}</p></div>`;
   return RATING_SNIPET_TEMPLATE;
 };
