@@ -112,6 +112,13 @@ const validateAndSendRating = () => {
     })
       .then((response) => response.json()) // parse the response as JSON
       .then((data) => {
+        // empty ratings array
+        const ratingSnippet = generateNewRatingSnippet(rating, ratingText);
+        // get rating container
+        const ratingContainer = document.querySelector(
+          ".reviews-container-inner"
+        );
+        ratingContainer.innerHTML = "";
         fetchRatings();
         closeOverlay();
         fetchAverageRating();
