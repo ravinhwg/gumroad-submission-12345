@@ -13,10 +13,10 @@ module.exports = {
     }
 
     try {
-      const reviews = await query(`SELECT * FROM reviews OFFSET $1 LIMIT $2`, [
-        Math.abs(page * perPage - perPage),
-        Math.abs(perPage),
-      ]);
+      const reviews = await query(
+        `SELECT * FROM reviews ORDER BY created_at DESC OFFSET $1 LIMIT $2`,
+        [Math.abs(page * perPage - perPage), Math.abs(perPage)]
+      );
       const total = await query("SELECT COUNT(*) FROM reviews");
       res.status(200).json({
         reviews: reviews.rows,
