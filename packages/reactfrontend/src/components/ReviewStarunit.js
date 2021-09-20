@@ -9,9 +9,9 @@ export default function ReviewStarUnit({ rating }) {
     isHalfStarneeded = true;
   }
   let grayStarCount = Math.abs(5 - Math.floor(rating));
-  const GRAY_STAR_TEMPLATE = <img src={starGray} class="star" alt="star" />;
-  const GOLD_STAR_TEMPLATE = <img src={starGold} class="star" alt="star" />;
-  const HALF_STAR_TEMPLATE = <img src={starHalf} class="star" alt="star" />;
+  const GRAY_STAR_TEMPLATE = <img src={starGray} className="star" alt="star" />;
+  const GOLD_STAR_TEMPLATE = <img src={starGold} className="star" alt="star" />;
+  const HALF_STAR_TEMPLATE = <img src={starHalf} className="star" alt="star" />;
   const starsArray = [];
   for (let i = 0; i < Math.floor(rating); i++) {
     starsArray.push(GOLD_STAR_TEMPLATE);
@@ -27,5 +27,10 @@ export default function ReviewStarUnit({ rating }) {
   if (isHalfStarneeded) {
     starsArray.pop();
   }
-  return <div class="star-group">{starsArray}</div>;
+
+  const finalStarsArray = starsArray.map((item, index) => {
+    return <span key={index}>{item}</span>;
+  });
+
+  return <div className="star-group">{finalStarsArray}</div>;
 }

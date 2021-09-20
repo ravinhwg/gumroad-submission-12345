@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import starGray from "./assets/star_gray.svg";
 import starHalfGray from "./assets/star_half_gray.svg";
 import starHalfGrayFlipped from "./assets/star_half_gray_flipped.svg";
 import ReviewUnit from "./components/ReviewUnit";
@@ -29,6 +28,10 @@ function App() {
         setRatings(ratings);
       });
   }, [newUserReviewRating]);
+
+  useEffect(() => {
+    document.title = `Gummy Reviews`;
+  }, []);
 
   useEffect(() => {
     let interval = setInterval(
@@ -96,147 +99,145 @@ function App() {
   };
 
   return (
-    <>
-      <head>
-        <title>gummy-reviews</title>
-      </head>
-      <body>
-        <div class="container">
-          <div>
-            <h1 class="product-name">The Minimalist Entrepreneur</h1>
-          </div>
-          <div>
-            <div class="overviewContainer">
-              <div class="innerOverviewContainer">
-                <p class="avg-rating">{averageRating.toFixed(1)}</p>
-                <div class="star-group avg-rating-stars">
-                  <ReviewStarUnit rating={averageRating.toFixed(1)} />
-                </div>
-              </div>
-              <button
-                class="add-review-button add-review-button-text"
-                onClick={() => {
-                  setModalIsOpen(true);
-                }}
-              >
-                Add review
-              </button>
-            </div>
-            <hr />
-          </div>
-          <div class="reviews-container">
-            <h2 class="reviews">Reviews</h2>
-            <div class="reviews-container-inner">
-              {ratings.map(({ rating, ratingText }) => {
-                return <ReviewUnit rating={rating} ratingText={ratingText} />;
-              })}
+    <div className="container">
+      <div>
+        <h1 className="product-name">The Minimalist Entrepreneur</h1>
+      </div>
+      <div>
+        <div className="overviewContainer">
+          <div className="innerOverviewContainer">
+            <p className="avg-rating">{averageRating.toFixed(1)}</p>
+            <div className="star-group avg-rating-stars">
+              <ReviewStarUnit rating={averageRating.toFixed(1)} />
             </div>
           </div>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={{
-              content: {
-                maxWidth: "40%",
-                maxHeight: "60%",
-                top: "50%",
-                left: "50%",
-                right: "auto",
-                bottom: "auto",
-                marginRight: "-50%",
-                transform: "translate(-50%, -50%)",
-              },
+          <button
+            className="add-review-button add-review-button-text"
+            onClick={() => {
+              setModalIsOpen(true);
             }}
-            contentLabel="Example Modal"
           >
-            <div overlay="overlay_one" class="review-overlay">
-              <h2 class="product-name">What's your rating?</h2>
-              <p class="rating-text">Rating</p>
-              <div class="star-group stars-on-overlay">
-                {!addNewReviewTouched ? (
-                  <>
-                    <img
-                      src={starHalfGray}
-                      class="star"
-                      onClick={() => showStarsOnSelect(0.5)}
-                      alt="star"
-                    />
-                    <img
-                      src={starHalfGrayFlipped}
-                      class="star"
-                      onClick={() => showStarsOnSelect(1)}
-                      alt="star"
-                    />
-                    <img
-                      src={starHalfGray}
-                      class="star"
-                      onClick={() => showStarsOnSelect(1.5)}
-                      alt="star"
-                    />
-                    <img
-                      src={starHalfGrayFlipped}
-                      class="star"
-                      onClick={() => showStarsOnSelect(2)}
-                      alt="star"
-                    />{" "}
-                    <img
-                      src={starHalfGray}
-                      class="star"
-                      onClick={() => showStarsOnSelect(2.5)}
-                      alt="star"
-                    />
-                    <img
-                      src={starHalfGrayFlipped}
-                      class="star"
-                      onClick={() => showStarsOnSelect(3)}
-                      alt="star"
-                    />{" "}
-                    <img
-                      src={starHalfGray}
-                      class="star"
-                      onClick={() => showStarsOnSelect(3.5)}
-                      alt="star"
-                    />
-                    <img
-                      src={starHalfGrayFlipped}
-                      class="star"
-                      onClick={() => showStarsOnSelect(4)}
-                      alt="star"
-                    />{" "}
-                    <img
-                      src={starHalfGray}
-                      class="star"
-                      onClick={() => showStarsOnSelect(4.5)}
-                      alt="star"
-                    />
-                    <img
-                      src={starHalfGrayFlipped}
-                      class="star"
-                      onClick={() => showStarsOnSelect(2)}
-                      alt="star"
-                    />
-                  </>
-                ) : (
-                  <ReviewStarUnit rating={userSelectedRating} />
-                )}
-              </div>
-              <p class="rating-text">Review</p>
-              <textarea
-                class="rating-textarea"
-                placeholder="Start Typing..."
-                onChange={(e) => setNewUserReview(e.target.value)}
-              ></textarea>
-              <button
-                class="add-review-button add-review-button-text overlay-submit"
-                onClick={addNewReview}
-              >
-                Submit review
-              </button>
-            </div>
-          </Modal>
+            Add review
+          </button>
         </div>
-      </body>
-    </>
+        <hr />
+      </div>
+      <div className="reviews-container">
+        <h2 className="reviews">Reviews</h2>
+        <div className="reviews-container-inner">
+          {ratings.map(({ rating, ratingText }, key) => {
+            return (
+              <ReviewUnit rating={rating} ratingText={ratingText} key={key} />
+            );
+          })}
+        </div>
+      </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={{
+          content: {
+            maxWidth: "40%",
+            maxHeight: "60%",
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+          },
+        }}
+        contentLabel="Example Modal"
+      >
+        <div overlay="overlay_one" className="review-overlay">
+          <h2 className="product-name">What's your rating?</h2>
+          <p className="rating-text">Rating</p>
+          <div className="star-group stars-on-overlay">
+            {!addNewReviewTouched ? (
+              <>
+                <img
+                  src={starHalfGray}
+                  className="star"
+                  style={{
+                    marginRight: -0.6 * starHalfGray.width,
+                  }}
+                  onClick={() => showStarsOnSelect(0.5)}
+                  alt="star"
+                />
+                <img
+                  src={starHalfGrayFlipped}
+                  className="star"
+                  onClick={() => showStarsOnSelect(1)}
+                  alt="star"
+                />
+                <img
+                  src={starHalfGray}
+                  className="star"
+                  onClick={() => showStarsOnSelect(1.5)}
+                  alt="star"
+                />
+                <img
+                  src={starHalfGrayFlipped}
+                  className="star"
+                  onClick={() => showStarsOnSelect(2)}
+                  alt="star"
+                />
+                <img
+                  src={starHalfGray}
+                  className="star"
+                  onClick={() => showStarsOnSelect(2.5)}
+                  alt="star"
+                />
+                <img
+                  src={starHalfGrayFlipped}
+                  className="star"
+                  onClick={() => showStarsOnSelect(3)}
+                  alt="star"
+                />
+                <img
+                  src={starHalfGray}
+                  className="star"
+                  onClick={() => showStarsOnSelect(3.5)}
+                  alt="star"
+                />
+                <img
+                  src={starHalfGrayFlipped}
+                  className="star"
+                  onClick={() => showStarsOnSelect(4)}
+                  alt="star"
+                />
+                <img
+                  src={starHalfGray}
+                  className="star"
+                  onClick={() => showStarsOnSelect(4.5)}
+                  alt="star"
+                />
+                <img
+                  src={starHalfGrayFlipped}
+                  className="star"
+                  onClick={() => showStarsOnSelect(2)}
+                  alt="star"
+                />
+              </>
+            ) : (
+              <ReviewStarUnit rating={userSelectedRating} />
+            )}
+          </div>
+          <p className="rating-text">Review</p>
+          <textarea
+            className="rating-textarea"
+            placeholder="Start Typing..."
+            onChange={(e) => setNewUserReview(e.target.value)}
+          ></textarea>
+          <button
+            className="add-review-button add-review-button-text overlay-submit"
+            onClick={addNewReview}
+          >
+            Submit review
+          </button>
+        </div>
+      </Modal>
+    </div>
   );
 }
 

@@ -2,12 +2,12 @@ import ReviewStarUnit from "./ReviewStarunit";
 
 export default function ReviewUnit({ rating, ratingText }) {
   return (
-    <div class="review-container">
-      <div class="star-group">
+    <div className="review-container">
+      <div className="star-group">
         <ReviewStarUnit rating={rating} />
       </div>
-      <p class="review-text-rating">{rating}</p>
-      <p class="review-text-body">, {ratingText}</p>
+      <p className="review-text-rating">{rating}</p>
+      <p className="review-text-body">, {ratingText}</p>
     </div>
   );
 }
