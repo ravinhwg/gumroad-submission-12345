@@ -12,7 +12,9 @@ hr {
   margin-left: auto;
   margin-right: auto;
   border-style: inset;
-  border-width: 1px;
+  border-color: #afafaf;
+  color: #afafaf;
+  background-color: #afafaf;
 }
 
 .product-name {
