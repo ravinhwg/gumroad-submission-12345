@@ -1,38 +1,200 @@
-.App {
-  text-align: center;
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-color: #afafaf;
+  color: #afafaf;
+  background-color: #afafaf;
 }
 
-.App-link {
-  color: #61dafb;
+.product-name {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 44px;
+  line-height: 52px;
+  color: #000000;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.avg-rating {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 44px;
+  line-height: 52px;
+  margin-right: 1ch;
+  color: #000000;
+}
+
+.star {
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0.02%;
+  color: linear-gradient(180deg, #ffcd69 0%, #fdce71 100%);
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.star-group {
+  display: flex;
+  flex-direction: row;
+  width: 170px;
+  height: 30px;
+  left: 314px;
+  top: 223px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 40vw;
+  width: 40vw;
+  align-self: center;
+}
+.overviewContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.innerOverviewContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-review-button {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  padding: 12px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.add-review-button-text {
+  font-family: Helvetica Neue;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #797874;
+}
+
+.reviews {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 33px;
+  color: #000000;
+}
+
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviews-container-inner {
+  display: flex;
+  flex-direction: column;
+  max-width: 50vw;
+}
+
+.review-container {
+  display: flex;
+  align-items: center;
+}
+
+.review-text-rating {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #000000;
+}
+.review-text-body {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  color: #b1b1b1;
+}
+.rating-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #000000;
+}
+.rating-textarea {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  border-width: 0px;
+  width: 100%;
+  height: 15vh;
+  color: #929292;
+}
+/* Overlay Styles */
+.overlayBg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+}
+.overlayBg.open {
+  display: block;
+}
+[overlay] {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  width: 30vw;
+  padding: 20px;
+  padding-top: 0px;
+  background-color: white;
+  box-shadow: 0 3px 5px #0005;
+  visibility: show;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  border-radius: 20px;
+  transition: visibility 0s linear 0.4s, opacity 0.4s, transform 0.4s;
+}
+[overlay].open {
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.overlay-submit {
+  width: 40%;
+  justify-content: center;
+  margin-top: 10px;
 }
