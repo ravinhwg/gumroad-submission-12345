@@ -11,6 +11,8 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [addNewReviewTouched, setAddNewReviewTouched] = useState(false);
   const [userSelectedRating, setUserSelectedRating] = useState(0);
+  const [newUserReview, setNewUserReview] = useState("");
+  const [newUserReviewRating, setNewUserReviewRating] = useState(0);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:3000/api/reviews`)
@@ -24,7 +26,7 @@ function App() {
         });
         setRatings(ratings);
       });
-  }, []);
+  }, [newUserReviewRating]);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:3000/api/reviews/average`)
@@ -35,7 +37,7 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [newUserReviewRating]);
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -44,6 +46,43 @@ function App() {
   const showStarsOnSelect = (rating) => {
     setAddNewReviewTouched(true);
     setUserSelectedRating(rating);
+  };
+
+  const addNewReview = () => {
+    if (
+      userSelectedRating > 0 &&
+      userSelectedRating < 6 &&
+      newUserReview.length > 0
+    ) {
+      fetch(`http://127.0.0.1:3000/api/reviews`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          starCount: userSelectedRating,
+          reviewText: newUserReview,
+        }),
+      })
+        .then((response) => response.json()) // parse the response as JSON
+        .then((data) => {
+          // empty ratings array and make the form ready for another review
+          setRatings([]);
+          setAddNewReviewTouched(false);
+          setUserSelectedRating(0);
+          setNewUserReview("");
+          setNewUserReviewRating(Math.round(Math.random() * 100000));
+
+          // close the modal
+          setModalIsOpen(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert("Invalid review");
+    }
   };
 
   return (
@@ -145,10 +184,11 @@ function App() {
               <textarea
                 class="rating-textarea"
                 placeholder="Start Typing..."
+                onChange={(e) => setNewUserReview(e.target.value)}
               ></textarea>
               <button
                 class="add-review-button add-review-button-text overlay-submit"
-                onclick="validateAndSendRating()"
+                onClick={addNewReview}
               >
                 Submit review
               </button>
