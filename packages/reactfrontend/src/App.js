@@ -3,10 +3,12 @@ import starGray from "./assets/star_gray.svg";
 import ReviewUnit from "./components/ReviewUnit";
 import "./App.css";
 import ReviewStarUnit from "./components/ReviewStarunit";
+import Modal from "react-modal";
 
 function App() {
   const [ratings, setRatings] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:3000/api/reviews`)
@@ -33,6 +35,10 @@ function App() {
       });
   }, []);
 
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <>
       <head>
@@ -53,7 +59,9 @@ function App() {
               </div>
               <button
                 class="add-review-button add-review-button-text"
-                onclick="openOverlay()"
+                onClick={() => {
+                  setModalIsOpen(true);
+                }}
               >
                 Add review
               </button>
@@ -68,55 +76,72 @@ function App() {
               })}
             </div>
           </div>
-          <div overlay="overlay_one" class="review-overlay">
-            <h2 class="product-name">What's your rating?</h2>
-            <p class="rating-text">Rating</p>
-            <div class="star-group stars-on-overlay">
-              <img
-                src={starGray}
-                class="star"
-                onclick="showStarsOnSelect(1)"
-                alt="star"
-              />
-              <img
-                src={starGray}
-                class="star"
-                onclick="showStarsOnSelect(2)"
-                alt="star"
-              />
-              <img
-                src={starGray}
-                class="star"
-                onclick="showStarsOnSelect(3)"
-                alt="star"
-              />
-              <img
-                src={starGray}
-                class="star"
-                onclick="showStarsOnSelect(4)"
-                alt="star"
-              />
-              <img
-                src={starGray}
-                class="star"
-                onclick="showStarsOnSelect(5)"
-                alt="star"
-              />
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={{
+              content: {
+                maxWidth: "40%",
+                maxHeight: "60%",
+                top: "50%",
+                left: "50%",
+                right: "auto",
+                bottom: "auto",
+                marginRight: "-50%",
+                transform: "translate(-50%, -50%)",
+              },
+            }}
+            contentLabel="Example Modal"
+          >
+            <div overlay="overlay_one" class="review-overlay">
+              <h2 class="product-name">What's your rating?</h2>
+              <p class="rating-text">Rating</p>
+              <div class="star-group stars-on-overlay">
+                <img
+                  src={starGray}
+                  class="star"
+                  onclick="showStarsOnSelect(1)"
+                  alt="star"
+                />
+                <img
+                  src={starGray}
+                  class="star"
+                  onclick="showStarsOnSelect(2)"
+                  alt="star"
+                />
+                <img
+                  src={starGray}
+                  class="star"
+                  onclick="showStarsOnSelect(3)"
+                  alt="star"
+                />
+                <img
+                  src={starGray}
+                  class="star"
+                  onclick="showStarsOnSelect(4)"
+                  alt="star"
+                />
+                <img
+                  src={starGray}
+                  class="star"
+                  onclick="showStarsOnSelect(5)"
+                  alt="star"
+                />
+              </div>
+              <p class="rating-text">Review</p>
+              <textarea
+                class="rating-textarea"
+                placeholder="Start Typing..."
+              ></textarea>
+              <button
+                class="add-review-button add-review-button-text overlay-submit"
+                onclick="validateAndSendRating()"
+              >
+                Submit review
+              </button>
             </div>
-            <p class="rating-text">Review</p>
-            <textarea
-              class="rating-textarea"
-              placeholder="Start Typing..."
-            ></textarea>
-            <button
-              class="add-review-button add-review-button-text overlay-submit"
-              onclick="validateAndSendRating()"
-            >
-              Submit review
-            </button>
-          </div>
+          </Modal>
         </div>
-        <script src="/app.js"></script>
       </body>
     </>
   );
