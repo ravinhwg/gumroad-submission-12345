@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
-    <script src="/app.js"></script>
     <title>gummy-reviews</title>
 </head>
 <body>
@@ -25,7 +24,7 @@
       <!-- Average Rating stars rendered here -->
       </div>
     </div>
-    <button class="add-review-button add-review-button-text">Add review</button>
+    <button class="add-review-button add-review-button-text"  onclick="openOverlay()">Add review</button>
     </div>
 </div>
 <hr>
@@ -35,6 +34,22 @@
        <!-- Reviews are displayed here -->
     </div>
 </div>
+<div overlay="overlay_one" class="review-overlay">
+    <h2 class="product-name">What's your rating?</h2>
+    <p class="rating-text">Rating</p>
+    <div class="star-group">
+        <img src="/assets/star_gray.svg" class="star" />
+        <img src="/assets/star_gray.svg" class="star" />
+        <img src="/assets/star_gray.svg" class="star" />
+        <img src="/assets/star_gray.svg" class="star" />
+        <img src="/assets/star_gray.svg" class="star" />
+    </div>
+    <p class="rating-text">Review</p>
+    <textarea class="rating-textarea" placeholder="Start Typing..."></textarea>
+    <button class="add-review-button add-review-button-text overlay-submit">Submit review</button>
+
+  </div>
 </div>
+<script src="/app.js"></script>
 </body>
 </html>
