@@ -100,7 +100,7 @@ function App() {
               <div class="innerOverviewContainer">
                 <p class="avg-rating">{averageRating.toFixed(1)}</p>
                 <div class="star-group avg-rating-stars">
-                  <ReviewStarUnit rating={averageRating} />
+                  <ReviewStarUnit rating={averageRating.toFixed(1)} />
                 </div>
               </div>
               <button
