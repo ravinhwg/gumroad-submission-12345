@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import starGray from "./assets/star_gray.svg";
+import starHalfGray from "./assets/star_half_gray.svg";
+import starHalfGrayFlipped from "./assets/star_half_gray_flipped.svg";
 import ReviewUnit from "./components/ReviewUnit";
 import "./App.css";
 import ReviewStarUnit from "./components/ReviewStarunit";
@@ -146,33 +148,63 @@ function App() {
                 {!addNewReviewTouched ? (
                   <>
                     <img
-                      src={starGray}
+                      src={starHalfGray}
+                      class="star"
+                      onClick={() => showStarsOnSelect(0.5)}
+                      alt="star"
+                    />
+                    <img
+                      src={starHalfGrayFlipped}
                       class="star"
                       onClick={() => showStarsOnSelect(1)}
                       alt="star"
                     />
                     <img
-                      src={starGray}
+                      src={starHalfGray}
+                      class="star"
+                      onClick={() => showStarsOnSelect(1.5)}
+                      alt="star"
+                    />
+                    <img
+                      src={starHalfGrayFlipped}
                       class="star"
                       onClick={() => showStarsOnSelect(2)}
                       alt="star"
+                    />{" "}
+                    <img
+                      src={starHalfGray}
+                      class="star"
+                      onClick={() => showStarsOnSelect(2.5)}
+                      alt="star"
                     />
                     <img
-                      src={starGray}
+                      src={starHalfGrayFlipped}
                       class="star"
                       onClick={() => showStarsOnSelect(3)}
                       alt="star"
-                    />
+                    />{" "}
                     <img
-                      src={starGray}
+                      src={starHalfGray}
                       class="star"
-                      onClick={() => showStarsOnSelect(4)}
+                      onClick={() => showStarsOnSelect(3.5)}
                       alt="star"
                     />
                     <img
-                      src={starGray}
+                      src={starHalfGrayFlipped}
                       class="star"
-                      onClick={() => showStarsOnSelect(5)}
+                      onClick={() => showStarsOnSelect(4)}
+                      alt="star"
+                    />{" "}
+                    <img
+                      src={starHalfGray}
+                      class="star"
+                      onClick={() => showStarsOnSelect(4.5)}
+                      alt="star"
+                    />
+                    <img
+                      src={starHalfGrayFlipped}
+                      class="star"
+                      onClick={() => showStarsOnSelect(2)}
                       alt="star"
                     />
                   </>
