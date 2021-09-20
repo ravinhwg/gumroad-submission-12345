@@ -8,6 +8,21 @@ let pool = new Pool({
   port: process.env.PGPORT,
 });
 
+pool.on("connect", (info) => {
+  console.log(
+    "POSTGRES: " +
+      info.connectionParameters.user +
+      " connected to " +
+      info.connectionParameters.host +
+      ":" +
+      info.connectionParameters.port +
+      "/" +
+      info.connectionParameters.database
+  );
+});
+pool.on("error", () => {
+  console.log("POSTGRES: Failed to connect to database");
+});
 module.exports = {
   query: (text, params) => pool.query(text, params),
 };
