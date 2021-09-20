@@ -18,7 +18,7 @@ module.exports = {
         Math.abs(perPage),
       ]);
       const total = await query("SELECT COUNT(*) FROM reviews");
-      res.send({
+      res.status(200).json({
         reviews: reviews.rows,
         metaData: {
           total: +total.rows[0].count,
@@ -33,8 +33,21 @@ module.exports = {
   },
   postReview: async (req, res) => {
     try {
-      // TODO: add database query to add a review
-      console.log("postReview");
+      // validate incoming reviews
+      const { starCount, reviewText } = req.body;
+      if (!starCount || !reviewText || starCount < 1 || starCount > 5) {
+        return res.status(400).json({
+          message: "Invalid review",
+        });
+      }
+
+      await query(
+        "INSERT INTO reviews(star_count, review_text) VALUES($1, $2)",
+        [+starCount, reviewText]
+      );
+      res.status(201).json({
+        message: "Review created",
+      });
     } catch (error) {
       throw new Error(error);
     }
