@@ -194,4 +194,5 @@ hr {
 .overlay-submit {
   width: 40%;
   justify-content: center;
+  margin-top: 10px;
 }
