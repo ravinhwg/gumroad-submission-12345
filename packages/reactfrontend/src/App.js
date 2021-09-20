@@ -31,6 +31,14 @@ function App() {
   }, [newUserReviewRating]);
 
   useEffect(() => {
+    let interval = setInterval(
+      () => setNewUserReviewRating(Math.round(Math.random() * 100000)),
+      1000 * 2
+    );
+    //destroy interval on unmount
+    return () => clearInterval(interval);
+  });
+  useEffect(() => {
     fetch(`http://127.0.0.1:3000/api/reviews/average`)
       .then((response) => response.json())
       .then((data) => {
